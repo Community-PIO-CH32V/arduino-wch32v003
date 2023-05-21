@@ -73,8 +73,10 @@ env.Append(
         "-Wl,--gc-sections",
         #"-flto",
         #"-fuse-linker-plugin",
-        "-nostdlib",
+        #"-nostdlib",
         #"-fwhole-program",
+        "--specs=nosys.specs",
+        "--specs=nano.specs",
         '-Wl,-Map="%s"' % join("${BUILD_DIR}", "${PROGNAME}.map")
     ],
 

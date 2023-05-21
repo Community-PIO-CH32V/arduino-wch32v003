@@ -949,9 +949,20 @@ void DelaySysTick( uint32_t n )
     SysTick->CTLR &= ~(1 << 0);
 }
 
-void _fini(){}
-void _init(){}
+//void _fini(){}
+//void _init(){}
+void *_sbrk(ptrdiff_t incr)
+{
+    extern char _end[];
+    extern char _heap_end[];
+    static char *curbrk = _end;
 
+    if ((curbrk + incr < _end) || (curbrk + incr > _heap_end))
+    return NULL - 1;
+
+    curbrk += incr;
+    return curbrk - incr;
+}
 /* From newlib */
 
 /* These magic symbols are provided by the linker.  */
