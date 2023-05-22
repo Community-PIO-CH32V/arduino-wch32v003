@@ -949,8 +949,8 @@ void DelaySysTick( uint32_t n )
     SysTick->CTLR &= ~(1 << 0);
 }
 
-//void _fini(){}
-//void _init(){}
+extern void _fini();
+extern void _init();
 void *_sbrk(ptrdiff_t incr)
 {
     extern char _end[];
