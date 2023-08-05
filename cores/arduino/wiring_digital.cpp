@@ -86,8 +86,10 @@ void pinMode(pin_size_t pin, PinMode mode)
             break;
     }
 
-    port->CFGLR &= ~(0xf << (p * 4));
-    port->CFGLR |= (pinConfig << (p * 4));
+    uint32_t cfglr_temp = port->CFGLR;
+    cfglr_temp &= ~(0xf << (p * 4));
+    cfglr_temp |= (pinConfig << (p * 4));
+    port->CFGLR = cfglr_temp;
 }
 
 
